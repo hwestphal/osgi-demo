@@ -1,0 +1,4 @@
+osgi-demo
+=========
+
+OSGi demonstration
