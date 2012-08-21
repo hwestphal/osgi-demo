@@ -57,6 +57,12 @@
 									<artifactId>org.apache.felix.scr</artifactId>
 									<version>1.6.0</version>
 								</artifactItem>
+								
+								<artifactItem>
+									<groupId>com.github.hwestphal</groupId>
+									<artifactId>com.github.hwestphal.osgidemo.helloworld.api</artifactId>
+									<version>${project.version}</version>
+								</artifactItem>								
 							</artifactItems>
 						</configuration>
 					</execution>
