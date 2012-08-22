@@ -69,6 +69,11 @@
 									<artifactId>com.github.hwestphal.osgidemo.helloworld.impl</artifactId>
 									<version>${project.version}</version>
 								</artifactItem>
+								<artifactItem>
+									<groupId>com.github.hwestphal</groupId>
+									<artifactId>com.github.hwestphal.osgidemo.helloworld.client</artifactId>
+									<version>${project.version}</version>
+								</artifactItem>
 							</artifactItems>
 						</configuration>
 					</execution>
