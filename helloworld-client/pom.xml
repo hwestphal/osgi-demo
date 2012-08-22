@@ -14,6 +14,12 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.6</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.github.hwestphal</groupId>
 			<artifactId>com.github.hwestphal.osgidemo.helloworld.api</artifactId>
 			<scope>provided</scope>
@@ -21,6 +27,11 @@
 		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
