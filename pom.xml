@@ -9,8 +9,9 @@
 
 	<modules>
 		<module>helloworld-api</module>
-		<module>helloworld-impl</module>
 		<module>helloworld-client</module>
+		<module>helloworld-impl</module>
+		<module>helloworld-impl-ds</module>
 		<module>bootstrap</module>
 	</modules>
 
