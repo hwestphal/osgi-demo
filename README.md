@@ -13,4 +13,4 @@ Build and run
     > mvn -f bootstrap/pom.xml exec:exec
 
 * Admin console: [http://localhost:8888/system/console/](http://localhost:8888/system/console/) (`admin`/`admin`)
-* Demo webapp: [http://localhost:8888/demo/](http://localhost:8888/demo/)
+* Demo webapp: [http://localhost:8888/demo/index.html](http://localhost:8888/demo/index.html)
