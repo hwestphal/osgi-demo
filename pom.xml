@@ -12,6 +12,7 @@
 		<module>helloworld-client</module>
 		<module>helloworld-impl</module>
 		<module>helloworld-impl-ds</module>
+		<module>webapp-core</module>
 		<module>bootstrap</module>
 	</modules>
 
