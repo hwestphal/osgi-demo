@@ -5,11 +5,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.servlet.ServletException;
 
+import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Deactivate;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.ReferenceCardinality;
 import org.apache.felix.scr.annotations.ReferencePolicy;
-import org.apache.felix.scr.annotations.References;
 import org.osgi.service.http.HttpContext;
 import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
@@ -24,8 +25,7 @@ import org.restlet.ext.servlet.ServerServlet;
 import com.github.hwestphal.osgidemo.webapp.core.api.AddOn;
 
 @Component
-@References({ @Reference(name = "httpService", referenceInterface = HttpService.class),
-		@Reference(name = "addOn", referenceInterface = AddOn.class, cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE, policy = ReferencePolicy.DYNAMIC) })
+@Reference(name = "addOn", referenceInterface = AddOn.class, cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE, policy = ReferencePolicy.DYNAMIC)
 public class Initializer {
 
 	private static final String ROOT_ALIAS = "/demo";
@@ -33,7 +33,11 @@ public class Initializer {
 
 	private final List<AddOn> addOns = new CopyOnWriteArrayList<AddOn>();
 
-	public void bindHttpService(HttpService httpService) throws NamespaceException, ServletException {
+	@Reference
+	private HttpService httpService;
+
+	@Activate
+	public void activate() throws NamespaceException, ServletException {
 		HttpContext httpContext = httpService.createDefaultHttpContext();
 		httpService.registerResources(ROOT_ALIAS, "/", httpContext);
 		ServerServlet restletServlet = new ServerServlet();
@@ -66,7 +70,8 @@ public class Initializer {
 		});
 	}
 
-	public void unbindHttpService(HttpService httpService) {
+	@Deactivate
+	public void deactivate() {
 		httpService.unregister(REST_ALIAS);
 		httpService.unregister(ROOT_ALIAS);
 	}

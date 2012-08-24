@@ -13,6 +13,8 @@
 		<module>helloworld-impl</module>
 		<module>helloworld-impl-ds</module>
 		<module>webapp-core</module>
+		<module>webapp-addon1</module>
+		<module>webapp-addon2</module>
 		<module>bootstrap</module>
 	</modules>
 
@@ -26,6 +28,11 @@
 			<dependency>
 				<groupId>com.github.hwestphal</groupId>
 				<artifactId>com.github.hwestphal.osgidemo.helloworld.api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.hwestphal</groupId>
+				<artifactId>com.github.hwestphal.osgidemo.webapp.core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
