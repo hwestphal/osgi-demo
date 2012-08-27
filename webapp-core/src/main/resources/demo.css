@@ -27,12 +27,9 @@
     right:20px;
 }
 
-.form-left-col {
-  width:310px;
-    float: left;
-}
-
-.form-right-col {
+#data {
+	font-family: monospace;
+    font-size: 36px;
 }
 
 ul {
@@ -41,7 +38,7 @@ ul {
   margin-top: 0px;
 }
 
-li a {
+li {
   text-decoration:none;
   display: block;
   color: #000000;
@@ -49,32 +46,9 @@ li a {
   padding: 8px;
 }
 
-li a:hover {
+li:hover {
   background-color: #4B0A1E;
   color: #BA8A92;
-}
-
-input, textarea {
-  border:1px solid #ccc;
-  min-height:30px;
-  outline: none;
-}
-
-.form-left-col input {
-  margin-bottom:15px;
-  margin-top:5px;
-  width:280px;
-}
-
-textarea {
-  margin-bottom:15px;
-    margin-top:5px;
-  height: 160px;
-    width:250px;
-}
-
-label {
-  display:block;
 }
 
 button {
