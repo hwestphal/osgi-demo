@@ -13,21 +13,21 @@
 						$.getJSON('rest/' + value['id'], {}, function(data) {
 							var content = $('#data');
 							content.empty();
-							content.append(JSON.stringify(data['content']));
-						});					
+							content.append(JSON.stringify(data));
+						});
 					});
 				});
 			});
 		});
 	};
-	
+
 	reload();
-	
+
 	$(function() {
 		$('#reload').on('click', function() {
 			$('#data').empty();
 			reload();
 		});
 	});
-	
+
 })();

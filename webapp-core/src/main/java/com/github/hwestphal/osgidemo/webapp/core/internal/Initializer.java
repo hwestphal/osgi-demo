@@ -22,16 +22,16 @@ import org.restlet.data.Status;
 import org.restlet.ext.jackson.JacksonRepresentation;
 import org.restlet.ext.servlet.ServerServlet;
 
-import com.github.hwestphal.osgidemo.webapp.core.api.AddOn;
+import com.github.hwestphal.osgidemo.webapp.core.api.Place;
 
 @Component
-@Reference(name = "addOn", referenceInterface = AddOn.class, cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE, policy = ReferencePolicy.DYNAMIC)
+@Reference(name = "place", referenceInterface = Place.class, cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE, policy = ReferencePolicy.DYNAMIC)
 public class Initializer {
 
 	private static final String ROOT_ALIAS = "/demo";
 	private static final String REST_ALIAS = "/demo/rest";
 
-	private final List<AddOn> addOns = new CopyOnWriteArrayList<AddOn>();
+	private final List<Place> places = new CopyOnWriteArrayList<Place>();
 
 	@Reference
 	private HttpService httpService;
@@ -54,13 +54,13 @@ public class Initializer {
 
 				String path = request.getResourceRef().getRemainingPart();
 				if (path.isEmpty()) {
-					response.setEntity(new JacksonRepresentation<Object>(addOns));
+					response.setEntity(new JacksonRepresentation<Object>(places));
 					return;
 				}
 
-				for (AddOn addOn : addOns) {
-					if (path.equals(addOn.getId())) {
-						response.setEntity(new JacksonRepresentation<Object>(addOn));
+				for (Place place : places) {
+					if (path.equals(place.getId())) {
+						response.setEntity(new JacksonRepresentation<Object>(place));
 						return;
 					}
 				}
@@ -76,12 +76,12 @@ public class Initializer {
 		httpService.unregister(ROOT_ALIAS);
 	}
 
-	public void bindAddOn(AddOn addOn) {
-		addOns.add(addOn);
+	public void bindPlace(Place place) {
+		places.add(place);
 	}
 
-	public void unbindAddOn(AddOn addOn) {
-		addOns.remove(addOn);
+	public void unbindPlace(Place place) {
+		places.remove(place);
 	}
 
 }
