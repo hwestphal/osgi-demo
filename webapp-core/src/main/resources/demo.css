@@ -1,56 +1,60 @@
 * {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 18px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 18px;
 }
 
 #header {
-  padding-top: 5px;
-    padding-bottom: 10px;
-    border-bottom: solid 1px #AAAAAA;
+	padding-top: 5px;
+	padding-bottom: 10px;
+	border-bottom: solid 1px #AAAAAA;
 }
 
 #sidebar {
-  position: absolute;
-  left: 10px;
-  top: 80px;
-  bottom: 20px;
-  width: 260px;
-  border:solid 1px #CCCCCC;
-  overflow-y: scroll;
+	position: absolute;
+	left: 10px;
+	top: 80px;
+	bottom: 20px;
+	width: 260px;
+	border: solid 1px #CCCCCC;
+	overflow-y: scroll;
 }
 
 #content {
-    position: absolute;
-    top: 80px;
-    bottom: 20px;
-    left:300px;
-    right:20px;
+	position: absolute;
+	top: 80px;
+	bottom: 20px;
+	left: 300px;
+	right: 20px;
 }
 
-#data {
-	font-family: monospace;
-    font-size: 36px;
+#map {
+	top: 50px;
+	botton: 20px;
+	left: 20px;
+	right: 20px;
+	height: 450px;
+	width: 600px;
 }
 
 ul {
-  list-style-type: none;
-  padding-left: 0px;
-  margin-top: 0px;
+	list-style-type: none;
+	padding-left: 0px;
+	margin-top: 0px;
 }
 
 li {
-  text-decoration:none;
-  display: block;
-  color: #000000;
-  border-bottom:solid 1px #CCCCCC;
-  padding: 8px;
+	text-decoration: none;
+	display: block;
+	color: #000000;
+	border-bottom: solid 1px #CCCCCC;
+	padding: 8px;
 }
 
 li:hover {
-  background-color: #4B0A1E;
-  color: #BA8A92;
+	background-color: #4B0A1E;
+	color: #BA8A92;
 }
 
 button {
-  padding:6px;
+	padding: 6px;
 }
