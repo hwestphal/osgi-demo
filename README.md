@@ -14,3 +14,8 @@ Build and run
 
 * Admin console: [http://localhost:8888/system/console/](http://localhost:8888/system/console/) (`admin`/`admin`)
 * Demo webapp: [http://localhost:8888/demo/index.html](http://localhost:8888/demo/index.html)
+
+Slides
+------
+
+An accompanying presentation can be watched [here](http://hwestphal.github.com/osgi-demo).
