@@ -14,7 +14,7 @@
 			<div id="intro">
 				<h1>Introduction to OSGi</h1>
 				<h2>Harald Westphal</h2>
-				<h3 ng-show="isAfter()">http://github.com/hwestphal</h3>
+				<h3 ng-show="isAfter()">http://github.com/hwestphal/osgi-demo</h3>
 			</div>
 	
 			<p id="counter" ng-show="isInsideDeck()">
@@ -31,7 +31,7 @@
 						<li>Module system
 						<li>Services
 						<li>Server-side OSGi
-						<li>Implementations and tools
+						<li>Implementations, tools and testing
 						<li>Live demo
 					</ul>
 				</slide>
@@ -93,7 +93,7 @@
 				<slide>
 					<h2>Bundle Manifest</h2>
 					<ul>
-						<li>Additions to <code>META-INF/MANIFEST.MF</code>
+						<li>Additions to META-INF/MANIFEST.MF
 						<li>Contains bundle meta-data
 					</ul>
 					<script type="syntaxhighlighter" slide-code="plain">
@@ -167,7 +167,158 @@
 						}
 					</script>					
 				</slide>
+
+				<slide>
+					<h2>What is a service?</h2>
+					<ul>
+						<li>A Java object which is published in the Service Registry
+						<li>It is published with one or more names (typically the FQN of an interface)
+						<li>Can be registered and unregistered by a bundle at any time
+						<li>Service references can be obtained by other bundles using the service's name
+					</ul>
+				</slide>
+
+				<slide>
+					<h2>Service Registration</h2>
+					<ul>
+						<li>Can contain meta-data information (defined by the framework and custom)
+					</ul>
+					<script type="syntaxhighlighter" slide-code="java">
+						IHelloWorldService service = new HelloWorldService();
+						Dictionary<String, Object> props = new Hashtable<String, Object>();
+						props.put(Constants.SERVICE_RANKING, 10);
+						props.put(Constants.SERVICE_VENDOR, "test.org");
+						props.put("foobar", true);
+						ServiceRegistration<IHelloWorldService> registration = context.registerService(IHelloWorldService.class, service, props);
+						registration.unregister();
+					</script>					
+				</slide>
+
+				<slide>
+					<h2>Service Consumption</h2>
+					<ul>
+						<li>Two-step process: Get service reference(s), get service object from reference 
+					</ul>
+					<script type="syntaxhighlighter" slide-code="java">
+						ServiceReference<IHelloWorldService> reference = context.getServiceReference(IHelloWorldService.class);
+						IHelloWorldService service = context.getService(reference);
+						service.hello("Joe");
+						context.ungetService(reference);
+					</script>					
+					<ul>
+						<li>Obtained referenced can be filtered
+					</ul>
+					<script type="syntaxhighlighter" slide-code="java">
+						Collection<ServiceReference<IHelloWorldService>> refs = context.getServiceReferences(IHelloWorldService.class, "(&(service.vendor=test.org)(foobar=true))");
+					</script>					
+				</slide>
 				
+				<slide>
+					<h2>We just scraped the surface...</h2>
+					<ul>
+						<li>org.osgi.framework.ServiceFactory: Creates services lazily
+						<li>org.osgi.util.tracker.ServiceTracker: Deals with service dynamics
+						<li>Declarative Services: Provide and consume service declaratively, dependency injection
+						<li>A bunch of standard and framework services...
+					</ul>
+				</slide>
+				
+				<slide>
+					<h2>OSGi on the server side</h2>
+					<ul>
+						<li>OSGi's module system and the dynamic service concept is interesting for server and/or enterprise applications
+						<li>But beware: Dealing with a dynamic runtime environment is hard
+						<li>OSGi: SOA for the JVM
+					</ul>
+				</slide>
+				
+				<slide>
+					<h2>Web Applications</h2>
+					<ul>
+						<li>Variant 1: Using the OSGi HTTP Service (and its extensions)
+						<li>Variant 2: Embedding an OSGi runtime in a web application ("Servlet Bridge")
+						<li>Variant 3: Framework extensions that treat WARs as bundles
+					</ul>
+				</slide>
+
+				<slide>
+					<h2>HTTP Service</h2>
+					<ul>
+						<li>Rather limited features
+						<li>Implementors provide extended interfaces to allow all features from the Servlet specification
+					</ul>
+					<script type="syntaxhighlighter" slide-code="java">
+						HttpService httpService = ...;
+						HttpContext httpContext = httpService.createDefaultHttpContext();
+						httpService.registerResources("/", "/static_files", httpContext);
+						httpService.registerServlet("/rest", new MyRestServlet(), httpContext);
+						httpService.unregister("/rest");
+						httpService.unregister("/rest");
+					</script>					
+				</slide>
+				
+				<slide>
+					<h2>Implementations</h2>
+					<ul>
+						<li>Equinox
+						<li>Apache Felix
+						<li>Knopflerfish
+					</ul>
+				</slide>
+
+				<slide>
+					<h2>Equinox</h2>
+					<ul>
+						<li>Reference implementation
+						<li>Core runtime for Eclipse RCP
+						<li>Great tooling in Eclipse IDE
+						<li>Not so great tooling for automated builds
+						<li>Many extensions to the core specification
+					</ul>
+				</slide>
+				
+				<slide>
+					<h2>Equinox/Eclipse Terminology</h2>
+					<ul>
+						<li>Plugin: Bundle + Extension (Points) 
+						<li>Feature: Grouping of plugins
+						<li>Product: Grouping of features, branding and configuration
+						<li>Update Site: Place where plugins and features can be downloaded
+						<li>Target Platform: Set of plugins and features where dependencies are resolved
+					</ul>
+				</slide>
+
+				<slide>
+					<h2>Apache Felix</h2>
+					<ul>
+						<li>"Lightweight" approach
+						<li>More appropriate for embedding in standard Java applications
+						<li>Greet tooling for Maven and Ant based builds
+					</ul>
+				</slide>
+
+				<slide>
+					<h2>Maven and OSGi</h2>
+					<ul>
+						<li>All the bundles, where do they all come from?
+						<li>Maven defines a dependency model on its own
+						<li>Does <strong>NOT</strong> match the OSGi model
+						<li>Variant 1: Code/POM first (BND, maven-bundle-plugin)
+						<li>Variant 2: Manifest first (tycho)
+					</ul>
+				</slide>
+
+				<slide>
+					<h2>Testing: Best Practices</h2>
+					<ul>
+						<li>Minimize dependencies on OSGi
+						<li>Run unit tests without OSGi
+						<li>Classloading issues are often detected only during runtime
+						<li>Write integration tests / smoke tests for checking dependency resolution and service registration/consumption
+						<li>When using Maven, use <a href="http://team.ops4j.org/wiki/display/paxexam/Pax+Exam">Pax Exam</a> for that
+					</ul>
+				</slide>
+
 				<slide class="interlude">
 					<h2></h2>
 					<h3>Okay, it's demo time!</h3>
