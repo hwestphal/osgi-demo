@@ -75,7 +75,7 @@ slide {
 	left: 880px;
 }
 
-slide p,slide li {
+slide > p,slide > li {
 	white-space: pre-line;
 }
 
@@ -83,9 +83,13 @@ slide li {
 	margin: 0.5em;
 }
 
-slide ol,slide ul {
+slide > ol,slide > ul {
 	list-style-position: inside;
 	margin: 1em 0.5em;
+}
+
+slide li li {
+	font-size: 0.9em;
 }
 
 slide img {
@@ -116,6 +120,15 @@ slide h3 {
 	font-size: 1em;
 	margin: 0;
 	font-weight: 400;
+}
+
+slide a {
+	text-decoration: underline;
+	color: #666;
+}
+
+slide a:hover {
+	color: blue;
 }
 
 #counter {
