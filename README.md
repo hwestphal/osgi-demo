@@ -18,4 +18,4 @@ Build and run
 Slides
 ------
 
-An accompanying presentation can be watched [here](http://hwestphal.github.io/osgi-demo).
+An accompanying presentation can be watched [here](http://hwestphal.github.io/osgi-demo/).
